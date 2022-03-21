@@ -67,7 +67,7 @@ abstract class PrintableCollection<T> implements Collectable<T>, Printable {
   }
 
   /**
-   * Función print que muestra una cadena con todos los items
+   * Función print abstracta
    */
   abstract print(): void;
 }
@@ -85,7 +85,7 @@ export class NumericPrintableCollection extends PrintableCollection<number> {
   }
 
   /**
-   * Funcion que imprime la colección de valores
+   * Funcion que imprime la colección de valores numericos
    */
   print(): void {
     const it: number[] = this.items;
@@ -98,5 +98,28 @@ export class NumericPrintableCollection extends PrintableCollection<number> {
   }
 }
 
+/**
+ * Clase StringPrintableCollection que hereda de la clase PrintableCollection
+ */
+export class StringPrintableCollection extends PrintableCollection<string> {
+  /**
+   * Constructror de la clase
+   * @param items array de items
+   */
+  constructor(items: string[]) {
+    super(items);
+  }
+
+  /**
+   * Funcion que imprime la colección de valores de string
+   */
+  print(): void {
+    const arrStr: string[] = this.items;
+    console.log(arrStr.join(','));
+  }
+}
+
 const num = new NumericPrintableCollection([1, 2]);
 num.print();
+const str = new StringPrintableCollection(["hola", "mundo"]);
+str.print();
