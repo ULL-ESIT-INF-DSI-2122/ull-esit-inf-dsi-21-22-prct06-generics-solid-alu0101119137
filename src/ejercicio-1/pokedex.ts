@@ -9,10 +9,7 @@ import {Marvel} from "./marvel";
 import {DC} from "./dc";
 
 export class Pokedex {
-  constructor(luchadores: Fighter[]) {
-    luchadores.forEach((element) => {
-      console.log(element);
-    });
+  constructor(private luchadores: Fighter[]) {
   }
 }
 
