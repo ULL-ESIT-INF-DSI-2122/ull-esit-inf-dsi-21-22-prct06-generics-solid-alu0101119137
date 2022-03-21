@@ -7,7 +7,7 @@
 /**
  * @type {DatosBasicos} Tipo de dato que almacena datos del luchador
  */
-type DatosBasicos = {
+export type DatosBasicos = {
   ataque: number;
   defensa: number;
   velocidad: number;
@@ -17,12 +17,12 @@ type DatosBasicos = {
 /**
  * @type {Universo} Universo al que pertenece el luchador
  */
- type Universo = 'marvel' | 'pokemon' | 'DC' | 'dragon ball' | 'star wars';
+export type Universo = 'marvel' | 'pokemon' | 'DC' | 'dragon ball' | 'star wars';
 
 /**
  * @brief Clase abstracta Fighter que crea un luchador
  */
-abstract class Fighter {
+export abstract class Fighter {
   /**
    * Constructor de la clase Fighter
    * @param nombre nombre del luchador
@@ -33,6 +33,6 @@ abstract class Fighter {
    * @param frase frase que dice el luchador
    */
   constructor(public readonly nombre: string, public readonly peso: number, public readonly altura: number,
-    public readonly datos: DatosBasicos, public readonly universo: Universo, public readonly frase: string) { 
+    public readonly datos: DatosBasicos, public readonly universo: Universo, public readonly frase: string) {
   }
 }
