@@ -17,7 +17,7 @@ export type DatosBasicos = {
 /**
  * @type {Universo} Universo al que pertenece el luchador
  */
-export type Universo = 'marvel' | 'pokemon' | 'DC' | 'dragon ball' | 'star wars';
+export type Universo = 'marvel' | 'pokemon' | 'DC' | 'star wars';
 
 /**
  * @brief Clase abstracta Fighter que crea un luchador
