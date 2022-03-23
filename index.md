@@ -7,7 +7,7 @@
 En esta práctica realizaremos 3 ejercicios en Typescript en los cuales aprenderemos a manejar sobre todo clases e interfaces genéricas. Además, utilizaremos TypeDoc para documentar el desarrollo del código implementado, así como las herramientas Mocha y Chai para incorporar desarrollo dirigipo por pruebas (TDD) o por comportamiento (BDD). Además se utilizarán las herramientas Instanbul y Coveralls para el cubrimiento del código. Y a la hora de realizar la estructura del código se seguirán los principios SOLID.
 
 ## Ejercicios
-### Ejercicio 1
+### Ejercicio 1. El combate definitivo  
 En este ejercicio se nos pide crear un programa que permita simular un combate entre varios luchadores de varios universos, como Marvel, DC, Star Wars o Pokemon. Además de crear una clase que almacene los datos de todos los luchadores independientemente del universo que sean.  
 
 Para la realización de este ejercicio en primer lugar creé una clase **Fighter** la cual es la encargada de que un luchador pueda combatir y esta clase será de la que hereden las otras clases. A continuación, para cada universo creé una clase distinta (marvel, dc, pokemon y starWars) las cuales heredan de **Fighter** y son prácticamente iguales entre ellas; También creé una clase a parte **Combat** y por útlimo, creé la clase **Pokedex**. Ahora se comentarán en profundidad cada una.  
@@ -142,4 +142,10 @@ export class Pokedex {
   }
 }
 ```
+
+### Ejercicio 2. DSIflix  
+Para este ejercicio se nos pide crear un modelo de datos de una plataforma de streaming como Netflix o HBO, esta plataforma podrá contener series, películas y documentales, por lo que tendremos que tener un catálogo desde el que podamos acceder a ellos.  
+
+### Ejercicio 3. El cifrado indescifrable  
+En este ejercicio se nos pide crear un programa que codifique y decodifique un mensaje con el cifrado de César con el cambio de que el desplazamiento en vez de ser establecido por el usuario un número para todo el mensaje a codificar o decodificar, se establecerá una clave con la cual se calculará el desplazamiento de las letras del mensaje.  
 
