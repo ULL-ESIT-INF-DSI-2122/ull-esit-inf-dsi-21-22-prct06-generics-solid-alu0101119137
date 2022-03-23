@@ -120,6 +120,9 @@ export class Combat<T extends Fighter, U extends Fighter> {
     return 50 * (luchador1.datos.ataque / luchador2.datos.defensa) * efecto;
   }
 
+  /**
+   * Función que pone en marcha el combate, simulandolo y mostrando por pantalla los datos de este
+   */
   start() {
     let danio1: number = 0;
     let danio2: number = 0;
