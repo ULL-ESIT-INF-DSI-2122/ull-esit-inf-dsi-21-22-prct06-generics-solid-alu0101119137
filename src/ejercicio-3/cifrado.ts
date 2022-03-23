@@ -48,6 +48,7 @@ export abstract class Cifrado {
         } else {
           aux = this.clave.charAt(contador);
           auxClave += aux;
+
           contador++;
           i++;
         }

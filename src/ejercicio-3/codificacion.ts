@@ -1,18 +1,18 @@
 /**
  * Ejercicio 3. El cifrado indescifrable
- * @module Cifrar
+ * @module Codificacion
  * @author Andrea Hernández Martín
  */
 
 import {Cifrado} from "./cifrado";
 import {Alfabeto} from "./cifrado";
 
-export class Cifrar extends Cifrado {
+export class Codificacion extends Cifrado {
   constructor(alfabeto: Alfabeto, mensaje: string, clave: string) {
     super(alfabeto, mensaje, clave);
   }
 
-  cifrar(): string {
+  codificacion(): string {
     let msgCifrado: string = '';
     this.eliminarEspacios();
     const auxClave = this.repetirClave();
@@ -30,11 +30,11 @@ export class Cifrar extends Cifrado {
   }
 
   print(): void {
-    console.log(`El mensaje ${this.mensaje} cifrado es: ${this.cifrar()}`);
+    console.log(`El mensaje ${this.mensaje} cifrado es: ${this.codificacion()}`);
   }
 }
 
-const cif = new Cifrar('ABCDEFGHIJKLMNÑOPQRSTUVWXYZ', 'HOLA', 'CLAVE');
+const cif = new Codificacion('ABCDEFGHIJKLMNÑOPQRSTUVWXYZ', 'HOLA', 'CLAVE');
 cif.print();
-const cif2 = new Cifrar('ABCDEFGHIJKLMNÑOPQRSTUVWXYZ', 'HOLA Mundo', 'CLAVE');
+const cif2 = new Codificacion('ABCDEFGHIJKLMNÑOPQRSTUVWXYZ', 'Hola Mundo', 'CLAVE');
 cif2.print();
