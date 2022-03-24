@@ -26,57 +26,7 @@ export class Combat<T extends Fighter, U extends Fighter> {
    * @param luchador2 Luchador que se defiede de tipo U
    * @returns El daño causado del luchador uno al luchador 2
    */
-  danio1a2(luchador1: T, luchador2: U): number {
-    let efecto: number = 0;
-    switch (luchador1.universo) {
-      case 'marvel':
-        if (luchador2.universo == 'marvel') {
-          efecto = 2;
-        } else if (luchador2.universo == 'pokemon') {
-          efecto = 1;
-        } else {
-          efecto = 0.5;
-        }
-        break;
-
-      case 'pokemon':
-        if (luchador2.universo == 'star wars' || luchador2.universo == 'marvel') {
-          efecto = 2;
-        } else {
-          efecto = 0.5;
-        }
-        break;
-
-      case 'DC':
-        if (luchador2.universo == 'DC') {
-          efecto = 2;
-        } else {
-          efecto = 0.5;
-        }
-        break;
-
-      case 'star wars':
-        if (luchador2.universo == 'DC') {
-          efecto = 2;
-        } else if (luchador2.universo == 'marvel') {
-          efecto = 0.5;
-        } else {
-          efecto = 1;
-        }
-        break;
-    }
-
-    console.log('Daño causado: ' + (50 * (luchador1.datos.ataque / luchador2.datos.defensa) * efecto).toFixed(2));
-    return 50 * (luchador1.datos.ataque / luchador2.datos.defensa) * efecto;
-  }
-
-  /**
-   * Función que calcula el daño entre el segundo luchador contra el primero
-   * @param luchador1 Luchador que ataca de tipo U
-   * @param luchador2 Luchador que se defiede de tipo T
-   * @returns El daño causado del luchador uno al luchador 2
-   */
-  danio2a1(luchador1: U, luchador2: T): number {
+  danio(luchador1: (T | U), luchador2: (T | U)): number {
     let efecto: number = 0;
     switch (luchador1.universo) {
       case 'marvel':
@@ -130,7 +80,7 @@ export class Combat<T extends Fighter, U extends Fighter> {
     while (danio1 <= this.luchador1.datos.hp && danio2 <= this.luchador2.datos.hp) {
       console.log(`Ataca ${this.luchador1.nombre}:`);
       console.log(`Dice la frase : ${this.luchador1.frase}:`);
-      danio2 += this.danio1a2(this.luchador1, this.luchador2);
+      danio2 += this.danio(this.luchador1, this.luchador2);
       console.log('El valor del HP de ' + (this.luchador1.nombre) + ' = ' + (this.luchador1.datos.hp - danio1).toFixed(2));
       console.log('El valor del HP de ' + (this.luchador2.nombre) + ' = ' + (this.luchador2.datos.hp - danio2).toFixed(2) + '\n');
 
@@ -140,7 +90,7 @@ export class Combat<T extends Fighter, U extends Fighter> {
 
       console.log(`Ataca ${this.luchador2.nombre}:`);
       console.log(`Dice la frase : ${this.luchador2.frase}:`);
-      danio1 += this.danio2a1(this.luchador2, this.luchador1);
+      danio1 += this.danio(this.luchador2, this.luchador1);
       console.log('El valor del HP de ' + (this.luchador1.nombre) + ' = ' + (this.luchador1.datos.hp - danio1).toFixed(2));
       console.log('El valor del HP de ' + (this.luchador2.nombre) + ' = ' + (this.luchador2.datos.hp - danio2).toFixed(2) + '\n');
     }

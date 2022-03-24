@@ -45,7 +45,7 @@ describe('Tests de las clases hijas de Fighter', () => {
   it('Se calcula el daño entre dos luchadores correctamente', () => {
     const combat1 = new Combat<Marvel, DC>(ironMan, wonderWoman);
     const combat2 = new Combat<DC, Pokemon>(wonderWoman, pikachu);
-    expect(combat1.danio1a2);
-    expect(combat2.danio2a1);
+    expect(combat1.danio);
+    expect(combat2.danio);
   });
 });

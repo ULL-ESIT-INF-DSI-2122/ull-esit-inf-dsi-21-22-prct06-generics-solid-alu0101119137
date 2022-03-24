@@ -57,7 +57,7 @@ export class StarWars extends Fighter {
 }
 ```
 - **Clase Combat:** esta clase es a encargada de simular el combate entre dos luchadores, que estos pueden ser tanto de distintos universos como del mismo. Para ello, la clase esta restringida con dos parámetros genéricos de tipo Fighter y a la cual se le pasan dos luchadores de ese tipo.  
-Luego, para calcular el daño que hacen los luchadores se crearon dos funciones *danio1a2* y *danio2a1*, las cuales hacen prácticamente lo mismo, que es calcular según el universo de cada luchador el efecto que hace el ataque, pero son diferentes por el parámetro que se le pasa a cada una, ya que a una se le pasa en primer lugar el parámetro tipo T y luego el tipo U, y la otra función es viceversa, para poder hacer ataques con los dos luchadores.  
+Luego, para calcular el daño que hacen los luchadores se creó una función *danio*, la cual lo que hace es calcular según el universo de cada luchador el efecto que hace el ataque, y a esta se le pasan dos luchadores que pueden ser del tipo T o U cada uno de ellos, de esta forma podrán ser de cualquier universo.    
 Por último, se creó la función *start* la cual simula el combate entre los dos jugadores y va mostrando por cada ataque el daño que le hace uno a otro, así como sus nombres y sus frases características.    
 **Código:**
 ```ts
@@ -66,7 +66,7 @@ export class Combat<T extends Fighter, U extends Fighter> {
   constructor(public luchador1: T, public luchador2: U) {
   }
 
-  danio1a2(luchador1: T, luchador2: U): number {
+  danio(luchador1: T, luchador2: U): number {
     let efecto: number = 0;
     switch (luchador1.universo) {
       case 'marvel':
