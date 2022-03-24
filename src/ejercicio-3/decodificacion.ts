@@ -7,11 +7,24 @@
 import {Cifrado} from "./cifrado";
 import {Alfabeto} from "./cifrado";
 
+/**
+ * Clase que decodifica un mensaje
+ */
 export class Decodificacion extends Cifrado {
+  /**
+   * Consturctor de la clase Decodificacion
+   * @param alfabeto Alfabeto que se va a utilizar para la decodificacion
+   * @param mensaje Mensaje que se quiere decodificar
+   * @param clave Clave que se va a utilizar para decodificar el mensaje
+   */
   constructor(alfabeto: Alfabeto, mensaje: string, clave: string) {
     super(alfabeto, mensaje, clave);
   }
 
+  /**
+   * Método que decodifica el mensaje según una clave
+   * @returns Retorna el mensaje decodificado
+   */
   decodificacion(): string {
     let msgCifrado: string = '';
     this.eliminarEspacios();
@@ -32,9 +45,11 @@ export class Decodificacion extends Cifrado {
     this.mensaje = msgCifrado;
     return this.mensaje;
   }
-
+  /**
+   * Método que imprime el resultado de la decodificacion
+   */
   print(): void {
-    console.log(`El mensaje ${this.mensaje} cifrado es: ${this.decodificacion()}`);
+    console.log(`El mensaje ${this.mensaje} decodificado es: ${this.decodificacion()}`);
   }
 }
 

@@ -61,6 +61,9 @@ export abstract class Cifrado {
     return auxClave;
   }
 
+  /**
+   * Método abstracto que se tendrá que implementar en las clases hijas
+   */
   abstract print(): void;
 }
 

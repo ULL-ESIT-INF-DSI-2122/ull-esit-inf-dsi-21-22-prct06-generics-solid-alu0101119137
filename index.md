@@ -149,3 +149,112 @@ Para este ejercicio se nos pide crear un modelo de datos de una plataforma de st
 ### Ejercicio 3. El cifrado indescifrable  
 En este ejercicio se nos pide crear un programa que codifique y decodifique un mensaje con el cifrado de César con el cambio de que el desplazamiento en vez de ser establecido por el usuario un número para todo el mensaje a codificar o decodificar, se establecerá una clave con la cual se calculará el desplazamiento de las letras del mensaje.  
 
+Para realizar el ejercicio creé tres clases, una clase padre **Cifrado** y dos clases hijas **Codificacion** y **Decodificacion**, las cuales explicaré a continuación.  
+
+- **Clase Cifrado:** esta es una clase abstracta que se encarga de almacenar los parámetros comunes y de calcular las funciones comunes que necesitan sus clases hijas. Los parámetros son el alfabeto que lo que hice fue un tipo de dato de la forma `type Alfabeto = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'` para tener siempre el mismo alfabeto sin que hayan errores a la hora de introducirlo, luego se le pasa el mensaje y una clave.  
+A continuación, creé tres funciones que son comunes a las clases hijas, en primer lugar creé la función *eliminarEspacios* que lo que hace es eliminar los espacios y poner las letras a mayúsculas tanto del mensaje como de la clave para poder operar con ellos. En segundo lugar, creé la función *repetirClave*, la cual lo que hace es en caso de que la clave sea menor que el mensaje, repite dicha clave caracter por caracter hasta que el tamaño sea igual al del mensaje; en el caso de que la clave sea mayor que el mensaje, lo que se hace es recortar la clave de forma que nos quedaría del tamaño del mensaje. Esta función retorna la clave modificada para luego operar con ella en vez de con la que nos pasó el usuario. Por último, creé una función *print* la cual es abstracta y se implementará en cada clase hija.  
+**Código:**
+```ts
+export abstract class Cifrado {
+  constructor(public readonly alfabeto: Alfabeto, public mensaje: string, public clave: string) {
+  }
+
+  eliminarEspacios(): void {
+    this.mensaje = this.mensaje.replace(/ /g, '').toUpperCase();
+    this.clave = this.clave.replace(/ /g, '').toUpperCase();
+  }
+
+  repetirClave(): string {
+    let auxClave: string = '';
+    let contador: number = 0;
+    let aux: string = '';
+
+    // Clave más pequeña que el mensaje
+    if (this.clave.length < this.mensaje.length) {
+      let i: number = 0;
+      while (i < this.mensaje.length) {
+        if (contador >= this.clave.length) {
+          contador = 0;
+        } else {
+          aux = this.clave.charAt(contador);
+          auxClave += aux;
+
+          contador++;
+          i++;
+        }
+      }
+    } else { // Clave mayor que el mensaje
+      for (let i = 0; i < this.mensaje.length; i++) {
+        auxClave += this.clave.charAt(i);
+      }
+    }
+    return auxClave;
+  }
+
+  abstract print(): void;
+}
+```
+- **Clase Codificacion:** esta clase hereda sus parámetros y métodos de la clase padre **Cifrado**, y se encarga de codificar un mensaje según un alfabeto y una clave, para ello se creó una función *codificacion* la cual en primer lugar utiliza los métodos *eliminarEspacios* y *repetirClave* de la clase **Cifrado** para poder operar con el resultado. Una vez eliminado los espacios y teniendo la clave del tamaño del mensaje, lo que hace es, por cada caracter de la clave y del mensaje, buscar en el alfabeto el índice del lugar de los caracteres y sumarlos entre ellos más 1, ya que las posiciones comienzan en 0, y aplicarle el módulo 27, ya que es el tamaño del alfabeto, y de esta forma se calcula el desplazamiento de la letra que queremos codificar. Una vez tenemos todos los índices de estas letras, lo único que hacemos es buscar dichos índices en el alfabeto y ya tendríamos el mensaje codificado.   
+**Código:**
+```ts
+export class Codificacion extends Cifrado {
+  constructor(alfabeto: Alfabeto, mensaje: string, clave: string) {
+    super(alfabeto, mensaje, clave);
+  }
+
+  codificacion(): string {
+    let msgCifrado: string = '';
+    this.eliminarEspacios();
+    const auxClave = this.repetirClave();
+    const suma: number[] = [];
+
+    for (let i = 0; i < this.mensaje.length; i++) {
+      suma.push((this.alfabeto.search(this.mensaje[i]) + this.alfabeto.search(auxClave[i]) + 1) % 27);
+    }
+
+    for (let i = 0; i < suma.length; i++) {
+      msgCifrado += this.alfabeto.charAt(suma[i]);
+    }
+    this.mensaje = msgCifrado;
+    return this.mensaje;
+  }
+
+  print(): void {
+    console.log(`El mensaje ${this.mensaje} cifrado es: ${this.codificacion()}`);
+  }
+}
+```
+- **Clase Decodificacion:** esta clase hereda sus parámetros y métodos de la clase padre **Cifrado**, y se encarga de decodificar un mensaje según un alfabeto y una clave, para ello se creó una función *decodificacion* la cual en primer lugar utiliza los métodos *eliminarEspacios* y *repetirClave* de la clase **Cifrado** para poder operar con el resultado. Una vez eliminado los espacios y teniendo la clave del tamaño del mensaje, lo que hace es, por cada caracter de la clave y del mensaje, contemplar dos casos. En primer lugar, el caso de que la posición de la letra del mensaje en el alfabeto sea mayor o igual que la de la clave, se busca en el alfabeto la resta de dichas posiciones menos 1, ya que empieza en 0 las posiciones y a esto se le aplica el módulo 27, siendo este el tamaño del alfabeto. En segundo lugar, se contempla el caso de que sea la posición de la letra del mensaje en el alfabeto sea menor que la de la clave, en este caso se hace lo mismo que en el anterior, pero en vez de aplicar el módulo 27, se suman 27 al resultado. Con estos dos casos, obtenemos los índices de las letras del mensaje codificado por lo que lo único que hacemos ahora es buscar dichos índices en el alfabeto y ya tendríamos el mensaje decodificado.  
+**Código:**
+```ts
+export class Decodificacion extends Cifrado {
+  constructor(alfabeto: Alfabeto, mensaje: string, clave: string) {
+    super(alfabeto, mensaje, clave);
+  }
+
+  decodificacion(): string {
+    let msgCifrado: string = '';
+    this.eliminarEspacios();
+    const auxClave = this.repetirClave();
+    const suma: number[] = [];
+
+    for (let i = 0; i < this.mensaje.length; i++) {
+      if (this.alfabeto.search(this.mensaje[i]) >= this.alfabeto.search(auxClave[i])) {
+        suma.push((this.alfabeto.search(this.mensaje[i]) - this.alfabeto.search(auxClave[i]) - 1) % 27);
+      } else {
+        suma.push((this.alfabeto.search(this.mensaje[i]) - this.alfabeto.search(auxClave[i]) - 1) + 27);
+      }
+    }
+
+    for (let i = 0; i < suma.length; i++) {
+      msgCifrado += this.alfabeto.charAt(suma[i]);
+    }
+    this.mensaje = msgCifrado;
+    return this.mensaje;
+  }
+
+  print(): void {
+    console.log(`El mensaje ${this.mensaje} cifrado es: ${this.decodificacion()}`);
+  }
+}
+```

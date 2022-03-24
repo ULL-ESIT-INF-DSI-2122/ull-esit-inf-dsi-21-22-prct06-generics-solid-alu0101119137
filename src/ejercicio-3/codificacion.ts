@@ -7,11 +7,23 @@
 import {Cifrado} from "./cifrado";
 import {Alfabeto} from "./cifrado";
 
+/**
+ * Clase que codifica un mensaje
+ */
 export class Codificacion extends Cifrado {
+  /**
+   * Consturctor de la clase Codificacion
+   * @param alfabeto Alfabeto que se va a utilizar para la codificacion
+   * @param mensaje Mensaje que se quiere codificar
+   * @param clave Clave que se va a utilizar para codificar el mensaje
+   */
   constructor(alfabeto: Alfabeto, mensaje: string, clave: string) {
     super(alfabeto, mensaje, clave);
   }
-
+  /**
+   * Método que codifica el mensaje según una clave
+   * @returns Retorna el mensaje codificado
+   */
   codificacion(): string {
     let msgCifrado: string = '';
     this.eliminarEspacios();
@@ -29,8 +41,11 @@ export class Codificacion extends Cifrado {
     return this.mensaje;
   }
 
+  /**
+   * Método que imprime el resultado de la codificacion
+   */
   print(): void {
-    console.log(`El mensaje ${this.mensaje} cifrado es: ${this.codificacion()}`);
+    console.log(`El mensaje ${this.mensaje} codificacdo es: ${this.codificacion()}`);
   }
 }
 
