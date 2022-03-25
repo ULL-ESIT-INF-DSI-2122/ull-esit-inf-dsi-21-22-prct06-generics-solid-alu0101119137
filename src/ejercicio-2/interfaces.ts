@@ -34,5 +34,5 @@ export interface Search<T> {
    * @param atributo Atributo a buscar
    * @param tipo Tipo de atributo
    */
-  buscar(atributo: string, tipo: string): T[];
+  buscar(atributo: (string | number), tipo: string): T[];
 }
