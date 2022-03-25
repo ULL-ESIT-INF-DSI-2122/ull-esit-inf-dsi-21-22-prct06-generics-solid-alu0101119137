@@ -1,5 +1,5 @@
 # Desarrollo de Sistemas Informáticos
-## Práctica 5. Objetos, clases e interfaces  
+## Práctica 6. Clases e interfaces genéricas. Principios SOLID  
 ### Andrea Hernández Martín - alu0101119137
 [Enlace a la Github Page](https://ull-esit-inf-dsi-2122.github.io/ull-esit-inf-dsi-21-22-prct06-generics-solid-alu0101119137/) 
 
@@ -479,3 +479,95 @@ export class Decodificacion extends Cifrado {
   }
 }
 ```
+## Documentación TypeDoc  
+Para la documentación de los ejercicios utilicé la herramienta TypeDoc que convierte los comentarios en el código fuente de TypeScript en documentación HTML renderizada. A continuación, adjunto el enlace a la página web creada mediante TypeDoc.  
+[Enlace al directorio que contiene la documentación de la práctica]()  
+![Imagen de la página principal]()
+![Imagen de un ejercicio]()
+![Imagen de un ejercicio]()
+
+## Testing  
+Para la realización del testing de los ejercicios utilicé las herramientas Mocha y Chai.  
+  
+He realizado pruebas sobre todos los ejercicios en los cuales compruebo que los valores pasados por parámetro dan el resultado esperado o al contrario, es decir, se comprueba que no dan el resultado esperado. Para ello he creado un fichero ejercicio-n.spec.ts por cada ejercicio y he añadido algunas pruebas de todas las funciones utilizadas.  
+
+A continuación muestro la salida en la terminal al ejecutar el test.  
+```
+  Tests de las clases hijas de Fighter
+    ✔ Se crea la clase Marvel correctamente
+    ✔ Se crea la clase DC correctamente
+    ✔ Se crea la clase Pokemon correctamente
+    ✔ Se crea la clase Star Wars correctamente
+    ✔ Se crea la clase Pokedex correctamente
+    ✔ Se crea la clase Combat correctamente
+    ✔ Se simula un combate entre varios universos
+    ✔ Se calcula el daño entre dos luchadores correctamente
+
+  Tests de las clases hijas de BasicStreamableCollection
+    Clase Series
+      ✔ Se crea correctamente una coleccion de series
+      ✔ Se añade la serie Outer Banks a la coleccion
+      ✔ Se obtiene la coleccion de series
+      ✔ Se busca una serie por el nombre La Casa de Papel
+      ✔ Se busca una serie por el año 2020
+      ✔ Se busca una serie por el genero Romance
+      ✔ Se busca una serie por numero de temporadas 5
+No esta disponible el método de búsqueda que especifica
+      ✔ Se busca una serie por duracion 100, value equal vacio
+    Clase Peliculas
+      ✔ Se crea correctamente una coleccion de peliculas
+      ✔ Se añade la pelicula Insidious a la coleccion
+      ✔ Se obtiene la coleccion de peliculas
+      ✔ Se busca una peli por el nombre Proyecto Adam
+      ✔ Se busca una peli por el año 2010
+      ✔ Se busca una peli por el genero Romance
+      ✔ Se busca una peli por el actor Ryan Reynolds
+      ✔ Se busca una peli por duracion 124
+      ✔ Se busca una peli por director James Wan
+No esta disponible el método de búsqueda que especifica
+      ✔ Se busca una peli por temporadas 1, value equal vacio
+    Clase Documentales
+      ✔ Se crea correctamente una coleccion de documentales
+      ✔ Se añade el documental Vivo a la coleccion
+      ✔ Se obtiene la coleccion de documentales
+      ✔ Se busca un documental por el nombre Titanic 20 años después
+      ✔ Se busca un documental por el año 2018
+      ✔ Se busca un documental por el genero Historia
+      ✔ Se busca un documental por duracion 80
+No esta disponible el método de búsqueda que especifica
+      ✔ Se busca un documental por temporadas 1, value equal vacio
+
+  Tests de la clases hijas de Cifrado
+    ✔ Se puede crear una clase Codificacion correctamente
+    ✔ Se codifica el mensaje hola mundo correctamente, value equal KAMWQXYEL
+    ✔ Se puede crear una clase Decodificacion correctamente
+    ✔ Se decodifica el mensaje KAMWQXYEL correctamente, value equal HOLA MUNDO
+    ✔ Se repite la clave correctamente, value equal CLAVCLAV
+
+  Test de la clase NumericPrintableCollection
+    ✔ Se crea correctamente la clase NumericPrintableCollection
+    ✔ Se añade correctamente un item
+    ✔ Se obtiene un item segun una posicion correctamente
+    ✔ Se elimina un item segun una posicion correctamente
+    ✔ Se obtiene el número total de items correctamente
+1,5,4
+    ✔ Se imprime el conjunto de items correctamente
+
+  45 passing (41ms)
+```
+
+## Coveralls  
+[![Coverage Status](https://coveralls.io/repos/github/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct06-generics-solid-alu0101119137/badge.svg?branch=main)](https://coveralls.io/github/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct06-generics-solid-alu0101119137?branch=main)  
+
+## Conclusiones  
+Esta práctica me ha resultado más sencilla que la anterior, debido a que he sabido realizar todos los ejercicios sin muchos inconvenientes. El ejercicio 3 es el que me pareció más interesante debido a la temática codificación y decodificación que me gusta  bastante. En cuanto a la parte de documentación y testing al haberla realizado en todas las prácticas anteriores no me ha supuesto ningún inconveniente. También he añadido la herramienta instanbul y coveralls, las cuales me han parecido bastante interesantes y útiles, y tampoco he tenido dificultades al utilizarlas gracias al vídeo tutorial que se nos proporcionó.
+
+## Bibliografía  
+- [Guión de la práctica](https://ull-esit-inf-dsi-2122.github.io/prct06-generics-solid/)
+- [Documentación TypeDoc](https://typedoc.org/)
+- [Documentación Mocha](https://mochajs.org/)
+- [Documentación Chai](https://www.chaijs.com/)
+- [Documentación Instanbul](https://istanbul.js.org/)
+- [Documentación Coveralls](https://coveralls.io/)
+- [Apuntes de clase sobre clases e interfaces genéricas.](https://ull-esit-inf-dsi-2122.github.io/typescript-theory/typescript-generics.html)
+- [Apuntes de clase sobre principios SOLID](https://ull-esit-inf-dsi-2122.github.io/typescript-theory/typescript-solid.html)
