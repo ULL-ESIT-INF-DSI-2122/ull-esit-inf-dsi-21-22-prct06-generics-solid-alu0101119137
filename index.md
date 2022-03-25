@@ -146,6 +146,227 @@ export class Pokedex {
 ### Ejercicio 2. DSIflix  
 Para este ejercicio se nos pide crear un modelo de datos de una plataforma de streaming como Netflix o HBO, esta plataforma podrá contener series, películas y documentales, por lo que tendremos que tener un catálogo desde el que podamos acceder a ellos.  
 
+A la hora de llevar a cabo este ejercicio, he creado una clase abstracta gérica **basicStreamableColecction**, dos interfaces genéricas **Streamable** y **Search**, y por último, creé tres clases hijas de la clase abstracta, una para cada tipo de colecciones, **Series**, **Peliculas** y **Documentales**. A continuación se comentarán detalladamente cada una de ellas.  
+
+- **Interfaz Streamable:** esta interfaz se encarga de representar una colección de datos concreta. La interfaz cuenta con un colección de array tipo T en la que se almacenará cualquier colección de datos. Además contiene dos métodos que tendrán que implementar las clases que la implementen, estos métodos son *add* que añade un programa nuevo a la colección y *getColeccion* que devuelve la colección de datos actual que tenemos.  
+**Código:**
+```ts
+export interface Streamable<T> {
+  coleccion: T[];
+  add(programa: T): void;
+  getColeccion(): T[];
+}
+```
+- **Interfaz Search:** esta interfaz se encarga de representar el método de búsqueda de una colección de datos concreta. Este método se ha separado de la interfaz mencionada anteoriormente para seguir con el principio SOLID *Interface segregation*. La interfaz cuenta un método que tendrán que implementar las clases que la implementen, este método es *buscar* el cual busca dentro de una colleción de datos el atributo que se le pasa según el tipo de búsqueda que queremos realizar, como por ejemplo, por nombre, año o género.  
+**Código:**
+```ts
+export interface Search<T> {
+  buscar(atributo: (string | number), tipo: string): T[];
+}
+```
+- **Clase basicStreamableColecction:** esta es una clase genérica y abstracta que implementa las dos interfaces comentadas anteriormente y que se encarga de implementar los métodos *add* y *getColeccion* de la interfaz **Streamable** y luego, el método *buscar* de la interfaz **Search** lo establece como abstracto para que cada clase hija sea la que lo implemente.  
+El constructor de esta clase lo que recibe como parámetros es un array de tipo T que tendrá las colecciones de datos. Luego, la función *add* lo que hace es añadirle a dicha coleccion un programa más del tipo que sea y por último, la función *getColeccion* devuelve un array con todos los programas de la colección.  
+**Código:** 
+```ts
+export abstract class BasicStreamableCollection<T> implements Streamable<T>, Search<T> {
+  constructor(public coleccion: T[]) {
+  }
+
+  add(programa: T): void {
+    this.coleccion.push(programa);
+  }
+
+  getColeccion(): T[] {
+    return this.coleccion;
+  }
+
+  abstract buscar(atributo: string, tipo: string): T[];
+}
+```
+- **Clase Series**: esta clase es una clase que hereda sus parámetros y sus métodos de la clase **BasicStreamableCollection** y se encarga de almacenar una colección de series. Para ello, en primer lugar, creé un tipo de datos que contiene un objeto de la forma `type Serie = {nombre: string; year: number; genero: string; episodios: number; temporadas: number;}` y que especifica los datos de una serie. Luego, al constructor de la clase se le pasa una colección del tipo Serie creado anteriormente y por último, se implementa el método *buscar* que era abstracto en la clase padre.  
+Este método recibe un atributo que queremos buscar y un tipo que es el tipo de atributo, mediante un switch comprobamos el tipo y con un bucle vamos comprobando todas las series de la colección de ese tipo que coincidan con el atributo, en caso de que coincida se guarda en el resultado final, que es un array de Serie, el cual retornará esta función. En caso de que no haya ninguna coincidencia, se retorna el array vacío y en caso de que el tipo de búsqueda no esté implentado se imprime un mensaje de error y también devuelve el array vacío.  
+**Código:**
+```ts
+export class Series extends BasicStreamableCollection<Serie> {
+  constructor(coleccion: Serie[]) {
+    super(coleccion);
+  }
+
+  buscar(atributo: (string | number), tipo: string): Serie[] {
+    const result: Serie[] = [];
+
+    switch (tipo) {
+      case 'nombre':
+        this.coleccion.forEach((element) => {
+          if (element.nombre == atributo) {
+            result.push(element);
+          }
+        });
+        break;
+
+      case 'year':
+        this.coleccion.forEach((element) => {
+          if (element.year == atributo) {
+            result.push(element);
+          }
+        });
+        break;
+
+      case 'genero':
+        this.coleccion.forEach((element) => {
+          if (element.genero == atributo) {
+            result.push(element);
+          }
+        });
+        break;
+
+      case 'episodios':
+        this.coleccion.forEach((element) => {
+          if (element.episodios == atributo) {
+            result.push(element);
+          }
+        });
+        break;
+
+      case 'temporadas':
+        this.coleccion.forEach((element) => {
+          if (element.temporadas == atributo) {
+            result.push(element);
+          }
+        });
+        break;
+
+      default:
+        console.log('No esta disponible el método de búsqueda que especifica');
+        break;
+    }
+    return result;
+  }
+}
+```
+- **Clase Peliculas**: esta clase es una clase que hereda sus parámetros y sus métodos de la clase **BasicStreamableCollection** y se encarga de almacenar una colección de peliculas, es muy parecida a la clase anterior. Para ello, en primer lugar, creé un tipo de datos que contiene un objeto de la forma `type Peli = {nombre: string; year: number; genero: string; duracion: number; actor: string; director: string;}` y que especifica los datos de una pelicula. Luego, al constructor de la clase se le pasa una colección del tipo Peli creado anteriormente y por último, se implementa el método *buscar* que era abstracto en la clase padre.  
+Este método recibe un atributo que queremos buscar y un tipo que es el tipo de atributo, mediante un switch comprobamos el tipo y con un bucle vamos comprobando todas las peliculas de la colección de ese tipo que coincidan con el atributo, en caso de que coincida se guarda en el resultado final, que es un array de Peli, el cual retornará esta función. En caso de que no haya ninguna coincidencia, se retorna el array vacío y en caso de que el tipo de búsqueda no esté implentado se imprime un mensaje de error y también devuelve el array vacío.  
+**Código:**
+```ts
+export class Peliculas extends BasicStreamableCollection<Peli> {
+  constructor(coleccion: Peli[]) {
+    super(coleccion);
+  }
+
+  buscar(atributo: (string | number), tipo: string): Peli[] {
+    const result: Peli[] = [];
+
+    switch (tipo) {
+      case 'nombre':
+        this.coleccion.forEach((element) => {
+          if (element.nombre == atributo) {
+            result.push(element);
+          }
+        });
+        break;
+
+      case 'year':
+        this.coleccion.forEach((element) => {
+          if (element.year == atributo) {
+            result.push(element);
+          }
+        });
+        break;
+
+      case 'genero':
+        this.coleccion.forEach((element) => {
+          if (element.genero == atributo) {
+            result.push(element);
+          }
+        });
+        break;
+
+      case 'duracion':
+        this.coleccion.forEach((element) => {
+          if (element.duracion == atributo) {
+            result.push(element);
+          }
+        });
+        break;
+
+      case 'actor':
+        this.coleccion.forEach((element) => {
+          if (element.actor == atributo) {
+            result.push(element);
+          }
+        });
+        break;
+
+      case 'director':
+        this.coleccion.forEach((element) => {
+          if (element.director == atributo) {
+            result.push(element);
+          }
+        });
+        break;
+
+      default:
+        console.log('No esta disponible el método de búsqueda que especifica');
+        break;
+    }
+    return result;
+  }
+}
+```
+- **Clase Documentales**: esta clase es una clase que hereda sus parámetros y sus métodos de la clase **BasicStreamableCollection** y se encarga de almacenar una colección de documentales, es muy parecida a las clases anteriores. Para ello, en primer lugar, creé un tipo de datos que contiene un objeto de la forma `type Documental = {nombre: string; year: number; genero: string; duracion: number;}` y que especifica los datos de un documental. Luego, al constructor de la clase se le pasa una colección del tipo Documental creado anteriormente y por último, se implementa el método *buscar* que era abstracto en la clase padre.  
+Este método recibe un atributo que queremos buscar y un tipo que es el tipo de atributo, mediante un switch comprobamos el tipo y con un bucle vamos comprobando todos los documentales de la colección de ese tipo que coincidan con el atributo, en caso de que coincida se guarda en el resultado final, que es un array de Documental, el cual retornará esta función. En caso de que no haya ninguna coincidencia, se retorna el array vacío y en caso de que el tipo de búsqueda no esté implentado se imprime un mensaje de error y también devuelve el array vacío.  
+**Código:**
+```ts
+export class Documentales extends BasicStreamableCollection<Documental> {
+  constructor(coleccion: Documental[]) {
+    super(coleccion);
+  }
+  
+  buscar(atributo: (string | number), tipo: string): Documental[] {
+    const result: Documental[] = [];
+
+    switch (tipo) {
+      case 'nombre':
+        this.coleccion.forEach((element) => {
+          if (element.nombre == atributo) {
+            result.push(element);
+          }
+        });
+        break;
+
+      case 'year':
+        this.coleccion.forEach((element) => {
+          if (element.year == atributo) {
+            result.push(element);
+          }
+        });
+        break;
+
+      case 'genero':
+        this.coleccion.forEach((element) => {
+          if (element.genero == atributo) {
+            result.push(element);
+          }
+        });
+        break;
+
+      case 'duracion':
+        this.coleccion.forEach((element) => {
+          if (element.duracion == atributo) {
+            result.push(element);
+          }
+        });
+        break;
+
+      default:
+        console.log('No esta disponible el método de búsqueda que especifica');
+        break;
+    }
+    return result;
+  }
+}
+```
+
 ### Ejercicio 3. El cifrado indescifrable  
 En este ejercicio se nos pide crear un programa que codifique y decodifique un mensaje con el cifrado de César con el cambio de que el desplazamiento en vez de ser establecido por el usuario un número para todo el mensaje a codificar o decodificar, se establecerá una clave con la cual se calculará el desplazamiento de las letras del mensaje.  
 
