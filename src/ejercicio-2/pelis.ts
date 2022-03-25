@@ -104,5 +104,5 @@ peliculas.push(proyAdam);
 peliculas.push(diarioNoa);
 
 const coleccionPeliculas = new Peliculas(peliculas);
-console.log(coleccionPeliculas.buscar(124, 'duracion'));
+console.log(coleccionPeliculas.buscar('Romance', 'genero'));
 
