@@ -10,6 +10,8 @@
     "./src/ejercicio-1/star_wars.ts",
     "./src/ejercicio-2/interfaces.ts",
     "./src/ejercicio-2/basicstreamable.ts",
+    "./src/ejercicio-2/series.ts",
+    "./src/ejercicio-2/pelis.ts",
     "./src/ejercicio-3/cifrado.ts",
     "./src/ejercicio-3/codificacion.ts",
     "./src/ejercicio-3/decodificacion.ts"
