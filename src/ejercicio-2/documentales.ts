@@ -9,7 +9,7 @@ import {BasicStreamableCollection} from './basicstreamable';
 /**
  * @type {Documental} Tipo de datos que almacena un objeto con las características de un documental
  */
-type Documental = {
+export type Documental = {
   nombre: string;
   year: number;
   genero: string;
@@ -85,6 +85,6 @@ const documental: Documental[] = [];
 documental.push(titanic);
 documental.push(america);
 
-const coleccionPeliculas = new Documentales(documental);
-console.log(coleccionPeliculas.buscar(2017, 'year'));
+const coleccionDoc = new Documentales(documental);
+console.log(coleccionDoc.buscar(2017, 'year'));
 

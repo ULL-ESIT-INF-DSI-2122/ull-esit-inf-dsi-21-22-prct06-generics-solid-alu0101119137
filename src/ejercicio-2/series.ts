@@ -9,7 +9,7 @@ import {BasicStreamableCollection} from './basicstreamable';
 /**
  * @type {Serie} Tipo de datos que almacena un objeto con las características de una serie
  */
-type Serie = {
+export type Serie = {
   nombre: string;
   year: number;
   genero: string;

@@ -9,7 +9,7 @@ import {BasicStreamableCollection} from './basicstreamable';
 /**
 * @type {Peli} Tipo de datos que almacena un objeto con las características de una pelicula
 */
-type Peli = {
+export type Peli = {
   nombre: string;
   year: number;
   genero: string;

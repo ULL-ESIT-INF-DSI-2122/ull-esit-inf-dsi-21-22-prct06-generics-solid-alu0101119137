@@ -12,6 +12,7 @@
     "./src/ejercicio-2/basicstreamable.ts",
     "./src/ejercicio-2/series.ts",
     "./src/ejercicio-2/pelis.ts",
+    "./src/ejercicio-2/documentales.ts",
     "./src/ejercicio-3/cifrado.ts",
     "./src/ejercicio-3/codificacion.ts",
     "./src/ejercicio-3/decodificacion.ts"
