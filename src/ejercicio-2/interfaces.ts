@@ -1,4 +1,10 @@
 /**
+ * Ejercicio 2. DSIflix
+ * @module Interfaces
+ * @author Andrea Hernández Martín
+ */
+
+/**
  * Interfaz para una coleccion de emisiones
  */
 export interface Streamable<T> {

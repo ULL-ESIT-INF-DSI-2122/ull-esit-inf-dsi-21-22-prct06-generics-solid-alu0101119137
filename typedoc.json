@@ -7,7 +7,12 @@
     "./src/ejercicio-1/marvel.ts",
     "./src/ejercicio-1/pokedex.ts",
     "./src/ejercicio-1/pokemon.ts",
-    "./src/ejercicio-1/star_wars.ts"
+    "./src/ejercicio-1/star_wars.ts",
+    "./src/ejercicio-2/interfaces.ts",
+    "./src/ejercicio-2/basicstreamable.ts",
+    "./src/ejercicio-3/cifrado.ts",
+    "./src/ejercicio-3/codificacion.ts",
+    "./src/ejercicio-3/decodificacion.ts"
   ],
   "out": "./docs"
 }
