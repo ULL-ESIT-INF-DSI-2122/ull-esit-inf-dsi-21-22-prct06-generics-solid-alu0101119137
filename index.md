@@ -478,7 +478,8 @@ export class Decodificacion extends Cifrado {
     console.log(`El mensaje ${this.mensaje} cifrado es: ${this.decodificacion()}`);
   }
 }
-```
+```  
+
 ## Documentación TypeDoc  
 Para la documentación de los ejercicios utilicé la herramienta TypeDoc que convierte los comentarios en el código fuente de TypeScript en documentación HTML renderizada. A continuación, adjunto el enlace a la página web creada mediante TypeDoc.  
 [Enlace repositorio documentacion Typedoc](https://github.com/ULL-ESIT-INF-DSI-2122/ull-esit-inf-dsi-21-22-prct06-generics-solid-alu0101119137/tree/main/docs)  
