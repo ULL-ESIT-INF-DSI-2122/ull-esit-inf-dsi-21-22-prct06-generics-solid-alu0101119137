@@ -43,10 +43,14 @@ export class PrimeNumber {
    */
   numPrimos(num: number): number[] {
     const primos: number[] = [];
-    for (let i = 1; i < num; i++) {
+    let contador: number = 0;
+    let i: number = 1;
+    while (contador < num) {
       if (this.esPrimo(i)) {
         primos.push(i);
+        contador++;
       }
+      i++;
     }
     return primos;
   }
